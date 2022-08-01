@@ -8,12 +8,21 @@ import 'HomePage.dart';
 class FoodVoucherPage extends StatefulWidget {
   const FoodVoucherPage({Key? key}) : super(key: key);
 
+
+
   @override
   State<FoodVoucherPage> createState() => _FoodVoucherPageState();
 }
 
 class _FoodVoucherPageState extends State<FoodVoucherPage> {
-  int foodRightCount = 1;
+  int FoodRightLeft = 1;
+
+  /*
+  qr linki için de böyle bir mantık oluşturdum, ja websitesi üzerinden yalnızca şifreyle erişilebilen "yemekkuponu"
+  kısmından adminler ve görevliler kodu okutur ve sayfa ziyaret edilince kodun kullanıldığı anlaşılarak sayı sıfıra düşer
+  ayrıca eğer tekrar okutulursa geçersiz uyarısı alınır */
+
+  String qrLink = "jarc.robcol.k12.tr/yemekkuponu/kaanakan/day1/1";
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +45,25 @@ class _FoodVoucherPageState extends State<FoodVoucherPage> {
 
                 // kalan yemek hakkı kısmı da backend aracılığıyla halledilebilir, aşağıdaki qr kod okutulunca gidilen linkle yemeğin alındığı anlaşılır ve hak sayısı 1 azaltılır gibi
 
-                Text("Kalan yemek hakkın: 1",
+                Row(
+
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+
+
+                    Text("Kalan yemek hakkın: ",
+                      style: TextStyle(
+                        fontSize: 25,
+                      )),
+
+                    Text(FoodRightLeft.toString(),
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 25
                     )),
+
+                ]
+                ),
+
                 Text("Kupon barkodunu aşağıda görebilirsin",
                     style: TextStyle(
                       fontSize: 15,
@@ -49,7 +73,7 @@ class _FoodVoucherPageState extends State<FoodVoucherPage> {
                 //qr görseli "qr_flutter" aracılığıyla oluşturuluyor, her ne kadar şu anlık manuel olarak girilmiş bir string olsa da backend ile otomatik hale getirilebilir
 
                 QrImage(
-                  data: "jarc.robcol.k12.tr/yemekkuponu/kaanakan/day1/1",
+                  data: qrLink,
                   version: QrVersions.auto,
                   size: 300.0,
                 ),

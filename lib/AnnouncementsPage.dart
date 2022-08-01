@@ -20,7 +20,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 35),
+                SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

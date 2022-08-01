@@ -1,5 +1,15 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+/*
+gerekli dosyaların hepsi import ediliyor, bu dosya pratik anlamda yalnızca navigasyon barı olduğu için bütün dosyalara route oluşturmak için
+bütün classları da importlamak gerekiyor haliyle
+ */
+
+/*
+ navigation kodu yazmak için bu videoyu kullandım genellikle: https://www.youtube.com/watch?v=4c36HNckh8A
+ baya iyi, işimi fazlasıyla gördü
+ */
+
 import 'package:flutter/material.dart';
 import 'package:jarc_app/FoodVoucherPage.dart';
 import 'package:jarc_app/GossipPage.dart';
@@ -8,38 +18,78 @@ import 'HomePage.dart';
 import 'AnnouncementsPage.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+
+
+
+
+  final firstDayDropdownValuePassedtoWelcomeScreen;
+
+  const WelcomeScreen({Key? key, this.firstDayDropdownValuePassedtoWelcomeScreen, required Color passedColortoWelcomeScreen}) : super(key: key);
+
 
   @override
+
+  //yine state oluşturuyoruz
+
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
 
-  //hangi sayfanın seçilmiş olduğunu takip edeceğimiz bir değişken atıyoruz
+  /* hangi sayfanın seçilmiş olduğunu takip edeceğimiz bir değişken atıyoruz
+  öncelikle ikinci sayfadan başlamasını istiyoruz, burda bir problem oluyor aslında
+  her ne kadar navigasyonda 3. sekmeden başlasa da ekranda "GossipPage.dart"ın widgetları oluyor
+  her ne kadar farklı bir yere geçiş yapıp anasayfaya geri gelince düzelse de çözülmesi gerekn bir sorun
+  şimdilik halledemedim ileriki sürümlerde düzeltebilirim umarım
+   */
 
   int _pageIndex = 2;
+  final String firstDayDropdownValuePassedfromWelcomeScreen = "Seçilmedi";
+  final Color passedColorfromWelcome = Colors.red;
+
+
+  // pageController burada atanıyor
+
   PageController pageController = PageController();
+
+  // buradaki fonskiyon butona her basıldığında çalışıyor
 
   void onTapped(int index) {
 
+    // ***geliştirme süreci printleri, silinmesi lazım bunların***
     print(index);
     print(_pageIndex);
 
-
+    /*
+     burda da aynı index sayılı sayfaya tıklarsa değişmesin diye hafif gereksiz bir kod yazmışım, kalsın yine cool
+     bunu aslında navigasyon kodu "HomePage.dart" dosyasının içindeyken her seferinde anasayfaya basınca üst üste yeni controllerlar gelmesin diye koymuştum
+     pratik olarak işe yarasa da navigasyon için yeni bir .dart dosyması açmak daha çok işime geldi açıkçası
+     */
 
     if (_pageIndex != index) {
+
+      // çalışıyor mu çalışmıyor mu diye yine print, ***silinmesi lazım***
       print("main executed");
+
+      // anlık olarak değişmesi için setState() kullanıyoruz
+
       setState(() {
         _pageIndex = index;
       });
+
+      // bunun aracılığıyla da istediğimiz index'teki sayfaya gidiyor
+
       pageController.jumpToPage(index);
     }
 
   }
 
+
   @override
   Widget build(BuildContext context) {
+
+
+    // her zamanki olaylar, burda sadece SafeArea body'si yok
     return Scaffold(
 
       body: PageView(
@@ -53,12 +103,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
         children: [
 
+          /*
+           burda da children olarak gerekli dart dosyaları aracılığıyla classları bağlıyoruz index sistemi
+            de burda çalışıyor; bilgisayarlar saymaya sıfırdan başladığı için sıfır olunca GossipPage açılıyor, sırasıyla takip ediyor işte
+           */
+
+
+
           GossipPage(),
           FoodVoucherPage(),
-          HomePage(),
+          HomePage(firstDayDropdownValuePassedtoHomePage: firstDayDropdownValuePassedfromWelcomeScreen, passedColor: passedColorfromWelcome,),
           WorkshopRegistryPage(),
           AnnouncementsPage(),
-
 
         ],
 
@@ -68,6 +124,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
 
         items: const <BottomNavigationBarItem>[
+
+          // navigasyondaki routeları iconlara ve labellara bağlıyouruz, böylece kullanıcı gitmek istediği yeri seçebiliyor
+
           BottomNavigationBarItem(icon: Icon(Icons.inbox_rounded), label: 'Gossip '),
           BottomNavigationBarItem(icon: Icon(Icons.fastfood_rounded), label: 'Yemek'),
           BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: 'Anasayfa'),
@@ -81,6 +140,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         onTap: onTapped,
 
       ),
+
+      /*
+       uygulamanın geri kalanında da kullanacağımız appbar, teker teker her dosyada eskisini silip yenisini oluşturmaya gerek yok
+       logolu logolu takılıyoruz işte
+       appbara aynı aynda hem görsel hem text koymayı bulamadım, normalde yanında Remixopolis  yazar diye hayal etmiştim
+       sanırım basılamayan butonlar kullanılarak yapılıyor görsel işini, yanında da düz title: "Remixo" diye yapıyorlar da geç oldu artık
+       */
 
 
       appBar: AppBar(

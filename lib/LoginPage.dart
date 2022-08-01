@@ -10,6 +10,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,23 +18,31 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
           child: Column(children: <Widget>[
             Column(children: <Widget>[
+              // ilk SizedBox yüksekliklerini mümkün olduğunca aynı tutmaya çalıştım, sayfa değiştirirken garip durmaması amacıyla
               SizedBox(height: 35),
 
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-
                   children: <Widget>[
-                    Text("Hoş Geldiniz!", style: TextStyle(fontSize: 35)),
-                    SizedBox(
-                      width: 10
-                    ),
-                    Image.asset("images/casual-life-3d-reward-badge-with-star-and-ribbon.png", fit: BoxFit.contain, height: 80),
-                  ]
-              ),
+                    /*
+                     her zamanki büyük başlık yanına görsel mantığı yine var, güzel bir merhaba görseli bulamadım
+                   bir tane el sallayan illüstrasyon vardı, kesmişler gibi korkunç duruyordu random bir madalya görseli koydum
+                    ,hoş duruyor zannımca
+                    */
 
-              SizedBox(
-                height: 10
-              ),
+                    Text("Hoş Geldiniz!", style: TextStyle(fontSize: 35)),
+                    SizedBox(width: 10),
+
+                    // assetleri genelde, icons8.com"dan alıyorum, güzel illüstrasyonları var
+
+                    //dosya isimleri biraz uzun farkındayım, burda bir de görselin boyunu ayarlıyoruz
+                    Image.asset(
+                        "images/casual-life-3d-reward-badge-with-star-and-ribbon.png",
+                        fit: BoxFit.contain,
+                        height: 80),
+                  ]),
+
+              SizedBox(height: 10),
 
               Text("Lütfen gerekli bilgileri girin.",
                   style: TextStyle(fontSize: 20)),
@@ -43,18 +52,30 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  SizedBox(height: 15),
 
-                  SizedBox(
-                    height:15
-                  ),
+                  /*
+                  burda ilk SizedBox kısmına kadar olan kısım diğer iki tane text ve TextField için de tekrar ediyor
+                  sadece text değişiyor, işte "Email" yerine "Okul Adı" vs
+                   */
 
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
-                    child: Text("Ad, Soyad",
-                        style: TextStyle(
-                          fontSize: 20,
-                        )),
-                  ),
+                  // daha güzel gözükmesi için sağdan ve soldan 15'lik padding koyuyoruz
+
+                  Row(children: <Widget>[
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(15, 0, 5, 0),
+                      child: Text("Ad, Soyad",
+                          style: TextStyle(
+                            fontSize: 20,
+                          )),
+                    ),
+                    Text(
+                      "(Kimlikte yazan şekliyle)",
+                      style: TextStyle(
+                        fontSize: 10,
+                      ),
+                    )
+                  ]),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
                     child: TextField(
@@ -66,17 +87,21 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-                  SizedBox(
-                      height:15
-                  ),
+                  SizedBox(height: 15),
 
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
-                    child: Text("Email",
-                        style: TextStyle(
-                          fontSize: 20,
-                        )),
-                  ),
+                  Row(children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(15, 0, 5, 0),
+                      child: Text("Email",
+                          style: TextStyle(
+                            fontSize: 20,
+                          )),
+                    ),
+                    Text("(Örnek: excalibur@gmail.com)", style: TextStyle(
+                      fontSize: 10
+                    )
+                    )
+                  ]),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
                     child: TextField(
@@ -88,16 +113,24 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-                  SizedBox(
-                      height:15
-                  ),
+                  SizedBox(height: 15),
 
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
-                    child: Text("Okul Adı",
+                  Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(15, 0, 5, 0),
+                        child: Text("Okul Adı",
+                            style: TextStyle(
+                              fontSize: 20,
+                            )),
+                      ),
+                      Text(
+                        "(Okulunuzun yasal adını giriniz)",
                         style: TextStyle(
-                          fontSize: 20,
-                        )),
+                          fontSize: 10,
+                        ),
+                      )
+                    ],
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
@@ -109,17 +142,14 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-
                 ]),
-
             SizedBox(
               height: 20,
             ),
-
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => WelcomeScreen()));
+                      MaterialPageRoute(builder: (context) => WelcomeScreen(firstDayDropdownValuePassedtoWelcomeScreen: "Seçilmedi", passedColortoWelcomeScreen: Colors.red)));
                 },
                 child: Text('Giriş')),
           ]),
