@@ -167,7 +167,7 @@ class _WorkshopRegistryPageState extends State<WorkshopRegistryPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomePage(firstDayDropdownValuePassedtoHomePage: firstDayDropdownValue, passedColor: Colors.green,),
+                          builder: (context) => HomePage(),
 
 
                         ),

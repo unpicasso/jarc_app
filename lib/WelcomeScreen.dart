@@ -20,11 +20,7 @@ import 'AnnouncementsPage.dart';
 class WelcomeScreen extends StatefulWidget {
 
 
-
-
-  final firstDayDropdownValuePassedtoWelcomeScreen;
-
-  const WelcomeScreen({Key? key, this.firstDayDropdownValuePassedtoWelcomeScreen, required Color passedColortoWelcomeScreen}) : super(key: key);
+  const WelcomeScreen({Key? key,}) : super(key: key);
 
 
   @override
@@ -44,8 +40,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
    */
 
   int _pageIndex = 2;
-  final String firstDayDropdownValuePassedfromWelcomeScreen = "Seçilmedi";
-  final Color passedColorfromWelcome = Colors.red;
+
 
 
   // pageController burada atanıyor
@@ -112,7 +107,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
           GossipPage(),
           FoodVoucherPage(),
-          HomePage(firstDayDropdownValuePassedtoHomePage: firstDayDropdownValuePassedfromWelcomeScreen, passedColor: passedColorfromWelcome,),
+          HomePage(),
           WorkshopRegistryPage(),
           AnnouncementsPage(),
 

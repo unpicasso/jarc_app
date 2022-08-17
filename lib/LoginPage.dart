@@ -9,8 +9,32 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+
+
 class _LoginPageState extends State<LoginPage> {
-  
+
+  // text field'da girilen değerleri alabilmek için controller oluşturmak gerekiyor, bunu aynen "GossipPage.dart" üzerinden implemente ettim
+  final nameSurnameController = TextEditingController();
+  final emailController = TextEditingController();
+  final schoolNameController = TextEditingController();
+
+  //değişkenleri başlatıyoruz
+
+  String nameSurnameString = "";
+  String emailString = "";
+  String schoolNameString = "";
+  int i = 0;
+
+  // görevde verilen isimler ve bu isimlerle ilişkilendirilmiş verileri burada tutuyoruz
+  final credentials = [
+    ["Kaan Akan","Robert Kolej","akakaa.25@robcol.k12.tr"],
+    ["Ufuk Çetiner","Robert Kolej", "cetufu.24@robcol.k12.tr"],
+    ["Gökçe Çiçek Arslan","Robert Kolej", "arsgok.24@robcol.k12.tr"],
+    ["Melih Mahmutoğlu","Basket Lisesi", "melmahmutoglu@gmail.com"],
+    ["Eda Erdem","Voleybol Lisesi", "eerdem@gmail.com"],
+  ];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
                     child: TextField(
+                      controller: nameSurnameController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.black12,
@@ -105,6 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
                     child: TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.black12,
@@ -135,6 +161,12 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
                     child: TextField(
+
+                      /*
+                    text field'dan gelen veriler için yukarıda tanımladığımız controllerla ilişkilendirmek gerekiyor,
+                    bir tanesini yaptıktan sonra hepsi aynı mantıkla ileriliyor
+                       */
+                      controller: schoolNameController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.black12,
@@ -148,9 +180,63 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => WelcomeScreen(firstDayDropdownValuePassedtoWelcomeScreen: "Seçilmedi", passedColortoWelcomeScreen: Colors.red)));
+                  setState(() {
+                    i = 0;
+
+                    nameSurnameString = nameSurnameController.text;
+                    emailString = emailController.text;
+                    schoolNameString = schoolNameController.text;
+
+                    print(nameSurnameString);
+                    print(emailString);
+                    print(schoolNameString);
+
+                    print(credentials[i][0]);
+                    print(credentials[i][1]);
+                    print(credentials[i][2]);
+
+                    print(credentials.length);
+                  });
+
+
+                  while (i < credentials.length) {
+
+
+                    if (nameSurnameString == (credentials[i][0])) {
+                      print("Name: OK");
+
+                      if (schoolNameString == (credentials[i][1])) {
+                        print("Corresponding School: OK");
+
+                        if (emailString == (credentials[i][2])) {
+                          print("Corresponding Email: OK");
+
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(
+                                  builder: (context) => WelcomeScreen()));
+                          break;
+
+
+                        }//girilen isim ve okul doğru ama email verisiyle eşleşmiyorsa sonsuza kadar çalışmasın diye programı durduruyoruz
+                        else {
+                          break;
+                        }
+
+                        //girilen isim doğru ama diğer verilerle eşleşmiyorsa sonsuza kadar çalışmasın diye programı durduruyoruz
+                      } else {
+                        break;
+                      }
+
+                    } else {
+
+                      print("Input data wasn't found, increasing range...");
+                      i = i + 1;
+                    }
+
+                  }
                 },
+
+
                 child: Text('Giriş')),
           ]),
         ),

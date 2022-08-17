@@ -4,10 +4,8 @@ import 'WorkshopRegistryPage.dart';
 
 class HomePage extends StatefulWidget {
 
-  final String firstDayDropdownValuePassedtoHomePage;
-  final Color passedColor;
 
-  const HomePage({Key? key, required this.passedColor, required  this.firstDayDropdownValuePassedtoHomePage}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -74,10 +72,10 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    Text('${widget.firstDayDropdownValuePassedtoHomePage}', style: TextStyle(
-                      color: widget.passedColor,
-                      fontSize: 12,
-                    ),),
+                    //Text('${widget.firstDayDropdownValuePassedtoHomePage}', style: TextStyle(
+                      //color: widget.passedColor,
+                      //fontSize: 12,
+
 
                   ]),
                   SizedBox(height: 20),
@@ -303,7 +301,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             Text("Seçim", style: TextStyle(
-                              color: widget.passedColor,
+
                               fontSize: 16,
                             ),),
 
