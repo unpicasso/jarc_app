@@ -35,11 +35,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   /* hangi sayfanın seçilmiş olduğunu takip edeceğimiz bir değişken atıyoruz
   öncelikle ikinci sayfadan başlamasını istiyoruz, burda bir problem oluyor aslında
   her ne kadar navigasyonda 3. sekmeden başlasa da ekranda "GossipPage.dart"ın widgetları oluyor
-  her ne kadar farklı bir yere geçiş yapıp anasayfaya geri gelince düzelse de çözülmesi gerekn bir sorun
+  her ne kadar farklı bir yere geçiş yapıp anasayfaya geri gelince düzelse de çözülmesi gereken bir sorun
   şimdilik halledemedim ileriki sürümlerde düzeltebilirim umarım
    */
 
-  int _pageIndex = 2;
+  int _pageIndex = 0;
 
 
 

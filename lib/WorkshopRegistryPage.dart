@@ -7,8 +7,9 @@ import 'HomePage.dart';
 
 // dropdown menu için bu videoyu kullandım: https://www.youtube.com/watch?v=K8Y7sWZ7Q3s
 
-final workshopProviderText = StateProvider((ref) => "Seçilmedi"); //burası sonradan seçim yapılan atölyenin adına dönecek
-final workshopProviderStatus = StateProvider((ref) => "Seçilmedi"); //burası da sonradan seçim yapıldığında seçildi yazacak
+ //burası sonradan seçim yapılan atölyenin adına dönecek
+final workshopProviderText = StateProvider((ref) => "Seçilmedi");
+final workshopProviderStatus = StateProvider((ref) => "Seçilmedi"); //burası da sonradan seçim yapıldığında "Seçildi" yazacak
 final workshopProviderColor = StateProvider((ref) => Colors.red); //seçim yapıldığında yeşil renge dönecek
 
 
@@ -25,6 +26,7 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
  değişmeyeceği için tanımlarken final kullanabiliriz
  */
 
+
   final items = [
     'Turkcell/Sessizlikte Diyalog',
     'Dans Workshop: Dans Stüdyosu',
@@ -40,8 +42,12 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
   String firstDayDropdownValue = 'Turkcell/Sessizlikte Diyalog';
   String secondDayDropdownValue = 'Turkcell/Sessizlikte Diyalog';
 
+
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -103,6 +109,9 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
                           onChanged: (String? newValue) {
                             setState(() {
                               firstDayDropdownValue = newValue!;
+
+                              ref.read(workshopProviderText).state = firstDayDropdownValue;
+
                             });
                           },
                         ),
@@ -167,6 +176,9 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
 
                       print(firstDayDropdownValue);
                       print(secondDayDropdownValue);
+
+                      //ref.read(workshopProviderText.state).state--;
+
 
 
 

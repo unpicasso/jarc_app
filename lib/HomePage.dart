@@ -7,9 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'WorkshopRegistryPage.dart';
 
 
-
-
-
 class HomePage extends ConsumerStatefulWidget {
 
   const HomePage({Key? key}) : super(key: key);
@@ -19,9 +16,8 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+
   int dayCount = 1;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +82,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       ),
                     ),
 
-                    Text(workshopString,
+                    Text(workshopString.toString(),
                     style: TextStyle(
                       fontSize: 18,
                       color: workshopColor,

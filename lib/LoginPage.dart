@@ -29,6 +29,10 @@ class _LoginPageState extends State<LoginPage> {
   String schoolNameString = "";
   int i = 0;
 
+  // uyarı mesajını göstermek için kullancağımız boolean, ilk başta göstermek istemediğimiz için "false" olarak ayarlı
+
+  bool passwordAlert = false;
+
   // görevde verilen isimler ve bu isimlerle ilişkilendirilmiş verileri burada tutuyoruz
   final credentials = [
     ["Kaan Akan","Robert Kolej","akakaa.25@robcol.k12.tr"],
@@ -183,6 +187,23 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 20,
             ),
+
+            Visibility(child:
+            Text("Bilgilerden en az bir tanesi hatalı!",
+                style:
+                TextStyle(
+                    color: Colors.red,
+                    fontSize: 16,
+
+                )),
+            visible: passwordAlert,
+            ),
+
+
+            SizedBox(
+              height: 20,
+            ),
+
             ElevatedButton(
                 onPressed: () {
                   setState(() {
@@ -206,7 +227,6 @@ class _LoginPageState extends State<LoginPage> {
 
                   while (i < credentials.length) {
 
-
                     if (nameSurnameString == (credentials[i][0])) {
                       print("Name: OK");
 
@@ -216,6 +236,8 @@ class _LoginPageState extends State<LoginPage> {
                         if (emailString == (credentials[i][2])) {
                           print("Corresponding Email: OK");
 
+                          passwordAlert = false;
+
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(
                                   builder: (context) => WelcomeScreen()));
@@ -224,11 +246,14 @@ class _LoginPageState extends State<LoginPage> {
 
                         }//girilen isim ve okul doğru ama email verisiyle eşleşmiyorsa sonsuza kadar çalışmasın diye programı durduruyoruz
                         else {
+                          passwordAlert = true;
+
                           break;
                         }
-
                         //girilen isim doğru ama diğer verilerle eşleşmiyorsa sonsuza kadar çalışmasın diye programı durduruyoruz
+
                       } else {
+                        passwordAlert = true;
                         break;
                       }
 
@@ -236,6 +261,8 @@ class _LoginPageState extends State<LoginPage> {
 
                       //isim listede var mı kontrol etmek için sırasıyla i değerini artırıyoruz
                       //yukarıda while statement kısmını listenin uzunluğuyla sınırladığımız için döngüye girmesi engellenmiş oluyor
+
+                      passwordAlert = true;
 
                       print("Input data wasn't found, increasing range...");
                       i = i + 1;
@@ -248,13 +275,14 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Giriş')),
 
 
-            // rahat girilsin diye bir buton koydum sonradan silinecek
+            // rahat girilsin diye bir buton koydum sonradan silinecek**
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => WelcomeScreen()));
                 },
-                child: Text('Geliştirme Süreci')),
+                child: Text('Dev')),
+
 
 
 
