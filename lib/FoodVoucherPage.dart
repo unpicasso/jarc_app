@@ -9,7 +9,6 @@ class FoodVoucherPage extends StatefulWidget {
   const FoodVoucherPage({Key? key}) : super(key: key);
 
 
-
   @override
   State<FoodVoucherPage> createState() => _FoodVoucherPageState();
 }

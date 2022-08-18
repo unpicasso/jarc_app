@@ -1,19 +1,25 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jarc_app/WelcomeScreen.dart';
 import 'HomePage.dart';
 
 // dropdown menu için bu videoyu kullandım: https://www.youtube.com/watch?v=K8Y7sWZ7Q3s
 
-class WorkshopRegistryPage extends StatefulWidget {
+final workshopProviderText = StateProvider((ref) => "Seçilmedi"); //burası sonradan seçim yapılan atölyenin adına dönecek
+final workshopProviderStatus = StateProvider((ref) => "Seçilmedi"); //burası da sonradan seçim yapıldığında seçildi yazacak
+final workshopProviderColor = StateProvider((ref) => Colors.red); //seçim yapıldığında yeşil renge dönecek
+
+
+class WorkshopRegistryPage extends ConsumerStatefulWidget {
   const WorkshopRegistryPage({Key? key}) : super(key: key);
 
   @override
-  State<WorkshopRegistryPage> createState() => _WorkshopRegistryPageState();
+  ConsumerState<WorkshopRegistryPage> createState() => _WorkshopRegistryPageState();
 }
 
-class _WorkshopRegistryPageState extends State<WorkshopRegistryPage> {
+class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
 /*
  dropdownlarda kullanacağımız workshop listesini burada hallediyoruz, liste uygulama çalışmaya başladıktan sonra
  değişmeyeceği için tanımlarken final kullanabiliriz
@@ -162,16 +168,8 @@ class _WorkshopRegistryPageState extends State<WorkshopRegistryPage> {
                       print(firstDayDropdownValue);
                       print(secondDayDropdownValue);
 
-                      null;
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
 
 
-                        ),
-                      );
 
 
                     },

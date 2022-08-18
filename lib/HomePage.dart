@@ -1,23 +1,36 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'WorkshopRegistryPage.dart';
 
-class HomePage extends StatefulWidget {
 
+
+
+
+class HomePage extends ConsumerStatefulWidget {
 
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   int dayCount = 1;
 
 
 
   @override
   Widget build(BuildContext context) {
+
+    final workshopString = ref.watch(workshopProviderText.notifier).state;
+    final workshopStatus = ref.watch(workshopProviderStatus.notifier).state;
+    final workshopColor = ref.watch(workshopProviderColor.notifier).state;
+
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -68,10 +81,17 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         "Atölye: ",
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                         ),
                       ),
                     ),
+
+                    Text(workshopString,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: workshopColor,
+                    ),),
+
                     //Text('${widget.firstDayDropdownValuePassedtoHomePage}', style: TextStyle(
                       //color: widget.passedColor,
                       //fontSize: 12,
@@ -300,9 +320,11 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            Text("Seçim", style: TextStyle(
+                            Text(workshopStatus, style: TextStyle(
 
                               fontSize: 16,
+                              //providerdan gelen değer giriliyor
+                              color: workshopColor,
                             ),),
 
                           ]),

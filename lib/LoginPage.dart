@@ -1,6 +1,10 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'WelcomeScreen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -30,6 +34,7 @@ class _LoginPageState extends State<LoginPage> {
     ["Kaan Akan","Robert Kolej","akakaa.25@robcol.k12.tr"],
     ["Ufuk Çetiner","Robert Kolej", "cetufu.24@robcol.k12.tr"],
     ["Gökçe Çiçek Arslan","Robert Kolej", "arsgok.24@robcol.k12.tr"],
+    ["Oguz Kurt","Robert Kolej", "kurogu.24@robcol.k12.tr"],
     ["Melih Mahmutoğlu","Basket Lisesi", "melmahmutoglu@gmail.com"],
     ["Eda Erdem","Voleybol Lisesi", "eerdem@gmail.com"],
   ];
@@ -229,6 +234,9 @@ class _LoginPageState extends State<LoginPage> {
 
                     } else {
 
+                      //isim listede var mı kontrol etmek için sırasıyla i değerini artırıyoruz
+                      //yukarıda while statement kısmını listenin uzunluğuyla sınırladığımız için döngüye girmesi engellenmiş oluyor
+
                       print("Input data wasn't found, increasing range...");
                       i = i + 1;
                     }
@@ -238,9 +246,23 @@ class _LoginPageState extends State<LoginPage> {
 
 
                 child: Text('Giriş')),
+
+
+            // rahat girilsin diye bir buton koydum sonradan silinecek
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => WelcomeScreen()));
+                },
+                child: Text('Geliştirme Süreci')),
+
+
+
           ]),
         ),
       ),
+
+
       appBar: AppBar(
         title: Row(children: [
           Image.asset("images/JARC-Logo.jpg", fit: BoxFit.contain, height: 32)

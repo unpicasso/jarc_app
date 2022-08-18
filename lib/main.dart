@@ -1,12 +1,17 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'HomePage.dart';
-import 'GossipPage.dart';
 import 'LoginPage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+
+
 
 void main() {
-  runApp(const jarc_app());
+  runApp(ProviderScope(
+      child: const jarc_app()
+  )
+  );
 }
 
 class jarc_app extends StatelessWidget {
@@ -24,7 +29,7 @@ class jarc_app extends StatelessWidget {
 
         primarySwatch: Colors.lightBlue,
 
-        // bu fontun boldu baya iyi gözüküyor, bence en azından. Bold Poppins fetişim var diyebiliriz
+        // bu fontun boldu baya iyi gözüküyor. Bold Poppins fetişim var diyebiliriz
         fontFamily: "Poppins",
         
       ),
