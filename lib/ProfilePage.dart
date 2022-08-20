@@ -23,12 +23,15 @@ class _ProfilePageState extends State<ProfilePage> {
               children: <Widget>[
 
                 SizedBox(height: 35),
-                Text("Duyurular", style: TextStyle(
+                Text("Profilim", style: TextStyle(
                     fontSize: 22
                 )),
                 SizedBox(height: 10),
-                Text("Mevcutsa aşağıda gözükür", style: TextStyle(
+                Text("Kişisel Bilgiler", style: TextStyle(
                   fontSize: 18,
+
+                  // zaman kalırsa login sayfasından, workshop ve case verileriyle basit bir sayfa oluşturulacak
+                  // appbar'ın sağ tarafından ufak bir profil butonuyla açılması planlanıyor
                 )),
 
               ]),

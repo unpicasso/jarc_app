@@ -9,10 +9,19 @@ import 'HomePage.dart';
 
 //burası sonradan seçim yapılan atölyenin adına dönecek
 final workshopProviderText = StateProvider((ref) => "Seçilmedi");
-final workshopProviderStatus = StateProvider((ref) =>
-    "Seçilmedi"); //burası da sonradan seçim yapıldığında "Seçildi" yazacak
-final workshopProviderColor =
-    StateProvider((ref) => Colors.red); //seçim yapıldığında yeşil renge dönecek
+final caseSunumProviderText = StateProvider((ref) =>
+    "Case Sunumları"); //burası sonradan seçim yapılan case'in adına dönecek
+final caseStudyProviderText = StateProvider((ref) =>
+    "Case Study"); //burası sonradan seçim yapılan case'in adına dönecek
+final caseSunumProviderLocationString = StateProvider((ref) => "Seçilmedi");
+final caseStudyProviderLocationString = StateProvider((ref) => "Seçilmedi");
+final workshopProviderLocationString = StateProvider((ref) => "Seçilmedi");
+
+final workshopPageChoiceProviderColorWarning = StateProvider((ref) => Colors
+    .red); //seçim yapıldığında ikisi de yeşil renge dönecek, ortak kullanılıyor
+final workshopPageChoiceProviderColorSimple = StateProvider((ref) => Colors
+    .black);
+
 
 class WorkshopRegistryPage extends ConsumerStatefulWidget {
   const WorkshopRegistryPage({Key? key}) : super(key: key);
@@ -24,13 +33,13 @@ class WorkshopRegistryPage extends ConsumerStatefulWidget {
 
 class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
 /*
- dropdownlarda kullanacağımız workshop listesini burada hallediyoruz, liste uygulama çalışmaya başladıktan sonra
+ dropdownlarda kullanacağımız workshop ve case listesini burada hallediyoruz, liste uygulama çalışmaya başladıktan sonra
  değişmeyeceği için tanımlarken final kullanabiliriz
  */
 
-  final items = [
+  final workshopItems = [
     'Turkcell/Sessizlikte Diyalog',
-    'Dans Workshop: Dans Stüdyosu',
+    'Dans Workshop',
     'Webtures/Dijital Pazarlama',
     'Bedia Ceylan Güzelce/Radyoculuk Hakkında',
     'WSA/Girişimcilikte Cinsiyet Eşitliği Workshop',
@@ -40,15 +49,46 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
     'Kampüs Turu',
   ];
 
+  final workshopItemLocations = [
+    'Bingham 1',
+    'Dans Stüdyosu',
+    'Amfitiyatro',
+    'Tiyatro',
+    'Woods 01',
+    'Woods 02',
+    'Woods 10',
+    'Woods 11',
+    'Kampüs',
+  ];
 
+  final caseItems = [
+    'Yenibirlider',
+    'Coca Cola',
+    'Vestel Ventures',
+  ];
+
+  final caseSunumLocations = [
+    'Bingham 1',
+    'Tiyatro',
+    'Heritage',
+  ];
+
+  final caseStudyLocations = [
+    'Woods',
+    'Sage',
+    'Gould',
+  ];
+
+
+
+// başlangıçta bir değer seçilebilmesi için listelerdeki ilk değerleri atıyoruz
   String firstDayDropdownValue = 'Turkcell/Sessizlikte Diyalog';
-  String secondDayDropdownValue = 'Turkcell/Sessizlikte Diyalog';
-
+  String caseDropdownValue = 'Yenibirlider';
+  int indexDropdownWorkshop = 0;
+  int indexDropdownCase = 0;
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -76,7 +116,7 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(10, 80, 10, 0),
                     ),
-                    Text("İlk Gün Tercihi: ",
+                    Text("İlk Gün Atölye Tercihi: ",
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
@@ -94,7 +134,7 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
                         child: DropdownButton(
                           value: firstDayDropdownValue,
 
-                          items: items.map((String items) {
+                          items: workshopItems.map((String items) {
                             return DropdownMenuItem(
                               value: items,
                               child: Text(
@@ -105,8 +145,7 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
                               ),
                             );
                           }).toList(),
-                          // After selecting the desired option,it will
-                          // change button value to selected value
+                          //
                           onChanged: (String? newValue) {
                             setState(() {
                               firstDayDropdownValue = newValue!;
@@ -119,7 +158,7 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
                     SizedBox(
                       height: 40,
                     ),
-                    Text("İkinci Gün Tercihi: ",
+                    Text("Case Tercihi: ",
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
@@ -135,9 +174,9 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: DropdownButton(
-                          value: secondDayDropdownValue,
+                          value: caseDropdownValue,
 
-                          items: items.map((String items) {
+                          items: caseItems.map((String items) {
                             return DropdownMenuItem(
                               value: items,
                               child: Text(
@@ -152,7 +191,9 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
                           // change button value to selected value
                           onChanged: (String? newValue) {
                             setState(() {
-                              secondDayDropdownValue = newValue!;
+                              caseDropdownValue = newValue!;
+
+
                             });
                           },
                         ),
@@ -163,19 +204,39 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
                 SizedBox(
                   height: 35,
                 ),
-
                 ElevatedButton(
                     onPressed: () {
-
-
                       //görevde öyle istendiği için yalnızca ilk günün değerlerini göderiyoruz ana sayfaya
                       //butona bastıktan sonra değerleri yalnızca bir kere okumasını istiyoruz
 
-                      ref.read(workshopProviderText.state).state = firstDayDropdownValue;
-                      ref.read(workshopProviderColor.state).state = Colors.green;
-                      ref.read(workshopProviderStatus.state).state = "Seçildi";
+                      ref.read(workshopProviderText.state).state =
+                          firstDayDropdownValue;
+                      ref.read(workshopPageChoiceProviderColorWarning.state).state =
+                          Colors.green;
 
-                      //ref.read(workshopProviderText.state).state--;
+                      ref.read(workshopPageChoiceProviderColorSimple.state).state = Colors.green;
+                      ref.read(workshopPageChoiceProviderColorWarning.state).state = Colors.green;
+                      ref.read(caseSunumProviderText.state).state = caseDropdownValue;
+                      ref.read(caseStudyProviderText.state).state = caseDropdownValue;
+
+                      indexDropdownWorkshop = workshopItems.indexOf(firstDayDropdownValue);
+
+                      indexDropdownCase = caseItems.indexOf(caseDropdownValue);
+
+
+                      ref.read(caseSunumProviderLocationString.state).state = caseSunumLocations[indexDropdownCase];
+                      ref.read(caseStudyProviderLocationString.state).state = caseStudyLocations[indexDropdownCase];
+                      ref.read(workshopProviderLocationString.state).state = workshopItemLocations[indexDropdownWorkshop];
+
+
+
+
+
+
+
+
+
+
                     },
                     child: Text('Kaydet'))
               ]),

@@ -14,7 +14,6 @@ class LoginPage extends StatefulWidget {
 }
 
 
-
 class _LoginPageState extends State<LoginPage> {
 
   // text field'da girilen değerleri alabilmek için controller oluşturmak gerekiyor, bunu aynen "GossipPage.dart" üzerinden implemente ettim
@@ -209,18 +208,20 @@ class _LoginPageState extends State<LoginPage> {
                   setState(() {
                     i = 0;
 
+                    //verileri text field'dan alabilmek için hepsi için controller oluşturuyoruz
+
                     nameSurnameString = nameSurnameController.text;
                     emailString = emailController.text;
                     schoolNameString = schoolNameController.text;
 
 
-
-
-                    print(credentials.length);
                   });
 
 
                   while (i < credentials.length) {
+
+                    // basit bir mantıkle alınan veriler elimizdeki listeyle karşılaştırılıyor,
+                    // eğer hepsi uygunsa Navigator.pushReplacement() fonksiyonu çalıştırılıyor
 
                     if (nameSurnameString == (credentials[i][0])) {
                       print("Name: OK");
@@ -241,6 +242,8 @@ class _LoginPageState extends State<LoginPage> {
 
                         }//girilen isim ve okul doğru ama email verisiyle eşleşmiyorsa sonsuza kadar çalışmasın diye programı durduruyoruz
                         else {
+
+                          // şifre yanlış girildi uyarısının açılması için boolean değerini "true" olarak değiştirmek gerekiyor
                           passwordAlert = true;
 
                           break;
@@ -263,9 +266,8 @@ class _LoginPageState extends State<LoginPage> {
                       i = i + 1;
                     }
 
-
-
                   }
+                  // **printler silinecek sonradan**
                   print(credentials[i][0]);
                   print(credentials[i][1]);
                   print(credentials[i][2]);
@@ -275,7 +277,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Giriş')),
 
 
-            // rahat girilsin diye bir buton koydum sonradan silinecek**
+            // şifre istemeden rahat girilsin diye bir buton koydum sonradan silinecek**
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushReplacement(context,

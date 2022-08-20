@@ -22,9 +22,16 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
 
+    // diğer dosyalardan kullanacağımız değişkenlere erişiyoruz
+
     final workshopString = ref.watch(workshopProviderText.notifier).state;
-    final workshopStatus = ref.watch(workshopProviderStatus.notifier).state;
-    final workshopColor = ref.watch(workshopProviderColor.notifier).state;
+    final caseSunumString = ref.watch(caseSunumProviderText.notifier).state;
+    final caseStudyString = ref.watch(caseStudyProviderText.notifier).state;
+    final caseSunumLocation = ref.watch(caseSunumProviderLocationString.notifier).state;
+    final caseStudyLocation = ref.watch(caseStudyProviderLocationString.notifier).state;
+    final workshopLocation = ref.watch(workshopProviderLocationString.notifier).state;
+    final workshopColorWarn = ref.watch(workshopPageChoiceProviderColorWarning.notifier).state;
+    final workshopColorSimple = ref.watch(workshopPageChoiceProviderColorSimple.notifier).state;
 
 
     return Scaffold(
@@ -69,9 +76,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
 
                   children: [
-
-
-
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
                       child: Text(
@@ -85,7 +89,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     Text(workshopString.toString(),
                     style: TextStyle(
                       fontSize: 18,
-                      color: workshopColor,
+                      color: workshopColorWarn,
                     ),),
 
                     //Text('${widget.firstDayDropdownValuePassedtoHomePage}', style: TextStyle(
@@ -272,9 +276,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Case Sunumları",
+                              caseSunumString,
                               style: TextStyle(
                                 fontSize: 16,
+                                color: workshopColorSimple,
                               ),
                             ),
                           ),
@@ -310,26 +315,22 @@ class _HomePageState extends ConsumerState<HomePage> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
                               child: Text(
-                                "Atölye: ",
+                                "Atölye",
                                 style: TextStyle(
                                   fontSize: 16,
+                                  color: workshopColorSimple,
                                 ),
                               ),
                             ),
-                            Text(workshopStatus, style: TextStyle(
-
-                              fontSize: 16,
-                              //providerdan gelen değer giriliyor
-                              color: workshopColor,
-                            ),),
 
                           ]),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Case Study",
+                              caseStudyString,
                               style: TextStyle(
                                 fontSize: 16,
+                                color: workshopColorSimple,
                               ),
                             ),
                           ),
@@ -406,9 +407,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Forum",
+                             caseSunumLocation,
                               style: TextStyle(
                                 fontSize: 16,
+                                color: workshopColorWarn,
                               ),
                             ),
                           ),
@@ -447,9 +449,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Forum",
+                              workshopLocation,
                               style: TextStyle(
                                 fontSize: 16,
+                                color: workshopColorWarn,
                               ),
                             ),
                           ),
@@ -457,19 +460,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Forum",
+                              caseStudyLocation,
                               style: TextStyle(
                                 fontSize: 16,
-                              ),
-                            ),
-                          ),
-
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "Tiyatro ",
-                              style: TextStyle(
-                                fontSize: 16,
+                                color: workshopColorWarn,
                               ),
                             ),
                           ),
@@ -478,6 +472,16 @@ class _HomePageState extends ConsumerState<HomePage> {
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               "Tiyatro ",
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Maze ",
                               style: TextStyle(
                                 fontSize: 16,
                               ),
