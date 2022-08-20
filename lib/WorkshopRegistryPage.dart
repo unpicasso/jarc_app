@@ -7,17 +7,19 @@ import 'HomePage.dart';
 
 // dropdown menu için bu videoyu kullandım: https://www.youtube.com/watch?v=K8Y7sWZ7Q3s
 
- //burası sonradan seçim yapılan atölyenin adına dönecek
+//burası sonradan seçim yapılan atölyenin adına dönecek
 final workshopProviderText = StateProvider((ref) => "Seçilmedi");
-final workshopProviderStatus = StateProvider((ref) => "Seçilmedi"); //burası da sonradan seçim yapıldığında "Seçildi" yazacak
-final workshopProviderColor = StateProvider((ref) => Colors.red); //seçim yapıldığında yeşil renge dönecek
-
+final workshopProviderStatus = StateProvider((ref) =>
+    "Seçilmedi"); //burası da sonradan seçim yapıldığında "Seçildi" yazacak
+final workshopProviderColor =
+    StateProvider((ref) => Colors.red); //seçim yapıldığında yeşil renge dönecek
 
 class WorkshopRegistryPage extends ConsumerStatefulWidget {
   const WorkshopRegistryPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<WorkshopRegistryPage> createState() => _WorkshopRegistryPageState();
+  ConsumerState<WorkshopRegistryPage> createState() =>
+      _WorkshopRegistryPageState();
 }
 
 class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
@@ -25,7 +27,6 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
  dropdownlarda kullanacağımız workshop listesini burada hallediyoruz, liste uygulama çalışmaya başladıktan sonra
  değişmeyeceği için tanımlarken final kullanabiliriz
  */
-
 
   final items = [
     'Turkcell/Sessizlikte Diyalog',
@@ -39,13 +40,13 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
     'Kampüs Turu',
   ];
 
+
   String firstDayDropdownValue = 'Turkcell/Sessizlikte Diyalog';
   String secondDayDropdownValue = 'Turkcell/Sessizlikte Diyalog';
 
 
   @override
   Widget build(BuildContext context) {
-
 
 
     return Scaffold(
@@ -110,18 +111,14 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
                             setState(() {
                               firstDayDropdownValue = newValue!;
 
-                              ref.read(workshopProviderText).state = firstDayDropdownValue;
-
                             });
                           },
                         ),
                       ),
                     ),
-
                     SizedBox(
                       height: 40,
                     ),
-
                     Text("İkinci Gün Tercihi: ",
                         style: TextStyle(
                           fontSize: 20,
@@ -162,28 +159,23 @@ class _WorkshopRegistryPageState extends ConsumerState<WorkshopRegistryPage> {
                       ),
                     ),
                   ],
-
                 ),
                 SizedBox(
                   height: 35,
                 ),
 
-                Text(firstDayDropdownValue),
-                Text(secondDayDropdownValue),
-
                 ElevatedButton(
                     onPressed: () {
 
-                      print(firstDayDropdownValue);
-                      print(secondDayDropdownValue);
+
+                      //görevde öyle istendiği için yalnızca ilk günün değerlerini göderiyoruz ana sayfaya
+                      //butona bastıktan sonra değerleri yalnızca bir kere okumasını istiyoruz
+
+                      ref.read(workshopProviderText.state).state = firstDayDropdownValue;
+                      ref.read(workshopProviderColor.state).state = Colors.green;
+                      ref.read(workshopProviderStatus.state).state = "Seçildi";
 
                       //ref.read(workshopProviderText.state).state--;
-
-
-
-
-
-
                     },
                     child: Text('Kaydet'))
               ]),

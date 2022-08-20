@@ -213,13 +213,8 @@ class _LoginPageState extends State<LoginPage> {
                     emailString = emailController.text;
                     schoolNameString = schoolNameController.text;
 
-                    print(nameSurnameString);
-                    print(emailString);
-                    print(schoolNameString);
 
-                    print(credentials[i][0]);
-                    print(credentials[i][1]);
-                    print(credentials[i][2]);
+
 
                     print(credentials.length);
                   });
@@ -268,7 +263,12 @@ class _LoginPageState extends State<LoginPage> {
                       i = i + 1;
                     }
 
+
+
                   }
+                  print(credentials[i][0]);
+                  print(credentials[i][1]);
+                  print(credentials[i][2]);
                 },
 
 
