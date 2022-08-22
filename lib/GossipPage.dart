@@ -66,7 +66,7 @@ class _GossipPageState extends State<GossipPage> {
                         height: 30,
                       ),
                       Text(
-                        "Merak etme, kimin yazdığı bilinmeyecek!",
+                        "Kimin yazdığı bilinmeyecek!",
                         style: TextStyle(
                           fontSize: 17,
                         ),

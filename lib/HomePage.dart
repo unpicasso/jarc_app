@@ -47,8 +47,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                 children: <Widget>[
                   SizedBox(height: 30),
 
-                  Text("Remixopolis'e Hoş Geldiniz!", style: TextStyle(fontSize: 27)), // merhaba yazısı gösteriliyor
-                  SizedBox(height: 0),
+                  Text("Remixopolis'e\n Hoş Geldiniz!", style: TextStyle(fontSize: 27)), // merhaba yazısı gösteriliyor
+                  SizedBox(height: 10),
                   Row( // fotoğraf ve yazının aynı yükseklikte olması için row içine yerleştirdim
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
