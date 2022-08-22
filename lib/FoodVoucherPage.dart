@@ -14,69 +14,73 @@ class FoodVoucherPage extends StatefulWidget {
 }
 
 class _FoodVoucherPageState extends State<FoodVoucherPage> {
-  int FoodRightLeft = 1;
+
+  int foodRightLeft = 1; // kaç yemek hakkı olduğunu gösteren değişkeni burada başlatıyoruz
 
   /*
   qr linki için de böyle bir mantık oluşturdum, ja websitesi üzerinden yalnızca şifreyle erişilebilen "yemekkuponu"
   kısmından adminler ve görevliler kodu okutur ve sayfa ziyaret edilince kodun kullanıldığı anlaşılarak sayı sıfıra düşer
   ayrıca eğer tekrar okutulursa geçersiz uyarısı alınır */
 
-  String qrLink = "jarc.robcol.k12.tr/yemekkuponu/kaanakan/day1/1";
+  String qrLink = "jarc.robcol.k12.tr/yemekkuponu/kaanakan/day1/1"; // eğer qr kodu okutursanız gerçekten bu linke gidiyor
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(height: 35),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Yemek Kuponu", style: TextStyle(fontSize: 30)),
-                    SizedBox(width:10),
-                    Image.asset("images/hamburger.png", fit: BoxFit.contain, height: 100),
-                  ],
-                ),
-                SizedBox(height: 10),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Center(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 35),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Yemek Kuponu", style: TextStyle(fontSize: 30)),
+                      SizedBox(width:10),
+                      Image.asset("images/hamburger.png", fit: BoxFit.contain, height: 100),
+                    ],
+                  ),
+                  SizedBox(height: 10),
 
-                // kalan yemek hakkı kısmı da backend aracılığıyla halledilebilir, aşağıdaki qr kod okutulunca gidilen linkle yemeğin alındığı anlaşılır ve hak sayısı 1 azaltılır gibi
+                  // kalan yemek hakkı kısmı da backend aracılığıyla halledilebilir, aşağıdaki qr kod okutulunca gidilen linkle yemeğin alındığı anlaşılır ve hak sayısı 1 azaltılır gibi
 
-                Row(
+                  Row(
 
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
 
 
-                    Text("Kalan yemek hakkın: ",
+                      Text("Kalan yemek hakkın: ",
+                        style: TextStyle(
+                          fontSize: 25,
+                        )),
+
+                      Text(foodRightLeft.toString(), // başlangıçta oluşturduğumuz kaç yemek hakkı olduğunu gösteren değişkeni burada
+                          // int olduğu için .toString() yardımıyla ekranda gösteriyoruz
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 25
                       )),
 
-                    Text(FoodRightLeft.toString(),
-                    style: TextStyle(
-                      fontSize: 25
-                    )),
+                  ]
+                  ),
 
-                ]
-                ),
+                  Text("Kupon barkodunu aşağıda görebilirsin",
+                      style: TextStyle(
+                        fontSize: 15,
+                      )),
+                  SizedBox(height: 50),
 
-                Text("Kupon barkodunu aşağıda görebilirsin",
-                    style: TextStyle(
-                      fontSize: 15,
-                    )),
-                SizedBox(height: 50),
+                  //qr görseli "qr_flutter" aracılığıyla oluşturuluyor, her ne kadar şu anlık manuel olarak girilmiş bir string olsa da backend ile otomatik hale getirilebilir
 
-                //qr görseli "qr_flutter" aracılığıyla oluşturuluyor, her ne kadar şu anlık manuel olarak girilmiş bir string olsa da backend ile otomatik hale getirilebilir
-
-                QrImage(
-                  data: qrLink,
-                  version: QrVersions.auto,
-                  size: 300.0,
-                ),
-              ]),
+                  QrImage( // tanımladığımız "qrLink" string üzerinden bir qr kod oluşuturarak normal bir görsel gibi ekranda gösteriyoruz
+                    data: qrLink,
+                    version: QrVersions.auto,
+                    size: 300.0,
+                  ),
+                ]),
+          ),
         ),
       ),
     );

@@ -17,12 +17,16 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage> {
 
+  // gün sayacını 1 olarak başlatıyoruz
+
   int dayCount = 1;
 
   @override
   Widget build(BuildContext context) {
 
-    // diğer dosyalardan kullanacağımız değişkenlere erişiyoruz
+    // diğer dosyalardan kullanacağımız değişkenlere erişirken bu dosyada ne adla kullılacaklarına erişiyoruz
+    // bu yöntem sayesinde başka bir dosyada bir değişken değiştiğinde de bu dosyadan erişebiliyor olacağız
+    // bunun için riverpod kullandım, tüm providerlar "WorkshopRegistryPage"den geliyor, tavsiyesi için Oğuz Kurt'a tekrar teşekkürler
 
     final workshopString = ref.watch(workshopProviderText.notifier).state;
     final caseSunumString = ref.watch(caseSunumProviderText.notifier).state;
@@ -35,7 +39,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
 
     return Scaffold(
-      body: SingleChildScrollView(
+      body: SingleChildScrollView( // ekranda çok fazla yazı olduğu için sığmadığı durumlarda hala erişilebilir olması için kaydırma mekaniği ekliyoruz
         child: SafeArea(
           child: Center(
             child: Column(
@@ -43,22 +47,26 @@ class _HomePageState extends ConsumerState<HomePage> {
                 children: <Widget>[
                   SizedBox(height: 30),
 
-                  Text("Remixopolis'e Hoş Geldiniz!", style: TextStyle(fontSize: 27)),
+                  Text("Remixopolis'e Hoş Geldiniz!", style: TextStyle(fontSize: 27)), // merhaba yazısı gösteriliyor
                   SizedBox(height: 0),
-                  Row(
+                  Row( // fotoğraf ve yazının aynı yükseklikte olması için row içine yerleştirdim
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Aşağıda programı görebilirsiniz",
-                          style: TextStyle(fontSize: 16)),
-                      SizedBox(width: 10),
-                      Image.asset(
-                          "images/casual-life-3d-blue-desk-calendar-1.png",
+                          style: TextStyle(fontSize: 20)),
+                      //SizedBox(width: 10),
+                      /*Image.asset(
+                          "images/casual-life-3d-blue-desk-calendar-1.png", // takvimin alındığı asset
                           fit: BoxFit.contain,
                           height: 72),
+
+                       */
                     ],
                   ),
 
-                  Row(
+                  SizedBox(height:20),
+
+                  Row( // başlangıçta başlatılan gün değişkeni burada ekranda gösteriliyor
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -66,7 +74,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         style: TextStyle(fontSize: 30),
                       ),
                       Text(
-                        dayCount.toString(),
+                        dayCount.toString(), // int olduğundan text içine koymak için .toString() kullanmak gerekiyor
                         style: TextStyle(fontSize: 30),
                       ),
                     ],
@@ -77,7 +85,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
+                      padding: const EdgeInsets.fromLTRB(8, 8, 0, 8), // gerekli padding veriliyor
                       child: Text(
                         "Atölye: ",
                         style: TextStyle(
@@ -86,27 +94,27 @@ class _HomePageState extends ConsumerState<HomePage> {
                       ),
                     ),
 
-                    Text(workshopString.toString(),
+                    Text(workshopString,
                     style: TextStyle(
                       fontSize: 18,
                       color: workshopColorWarn,
                     ),),
 
-                    //Text('${widget.firstDayDropdownValuePassedtoHomePage}', style: TextStyle(
-                      //color: widget.passedColor,
-                      //fontSize: 12,
 
 
                   ]),
                   SizedBox(height: 20),
-                  Container(
+                  Container( // buradaki ana mantıkla başlangıçta üç tane yan yana olacak şekilde column açarak bunların içine sonradan gerekli verileri girmek
+                    // böylece verilerin aynı row içinde olmasalar dahi hizalanmış olmaları garanti ediliyor
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Column(children: [
                           Row(
                             children: [
-                            Text(
+                            Text( // zaman text'inin gösterildiği alan sonrasında tekrardan ufak bir görsel var, **buradan sonrasında her column için aynı işlemler yapılıyor,
+                              // o sebeple hepsi için, yaklaşık 340 satır, anlatmaya gerek olduğunu düşünmüyorum
+                              // yukarıda anlattığım şekliyle yaptım hepsini (container yanı)
                               "Zaman",
                               style: TextStyle(
                                 fontSize: 22,
@@ -118,7 +126,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               ),
 
                               Image.asset(
-                                  "images/casual-life-3d-pink-alarm-clock-on-ground.png",
+                                  "images/3d-fluency-clock.png",
                                   fit: BoxFit.contain,
                                   height: 25),
                             ]

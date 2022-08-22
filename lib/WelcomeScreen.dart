@@ -13,6 +13,7 @@ bütün classları da importlamak gerekiyor haliyle
 import 'package:flutter/material.dart';
 import 'package:jarc_app/FoodVoucherPage.dart';
 import 'package:jarc_app/GossipPage.dart';
+import 'package:jarc_app/ProfilePage.dart';
 import 'package:jarc_app/WorkshopRegistryPage.dart';
 import 'HomePage.dart';
 import 'AnnouncementsPage.dart';
@@ -24,7 +25,6 @@ class WelcomeScreen extends StatefulWidget {
 
 
   @override
-
   //yine state oluşturuyoruz
 
   State<WelcomeScreen> createState() => _WelcomeScreenState();
@@ -42,7 +42,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   int _pageIndex = 0;
 
 
-
   // pageController burada atanıyor
 
   PageController pageController = PageController();
@@ -50,7 +49,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   // buradaki fonskiyon butona her basıldığında çalışıyor
 
   void onTapped(int index) {
-
     // ***geliştirme süreci printleri, silinmesi lazım bunların***
     print(index);
     print(_pageIndex);
@@ -62,7 +60,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
      */
 
     if (_pageIndex != index) {
-
       // çalışıyor mu çalışmıyor mu diye yine print, ***silinmesi lazım***
       print("main executed");
 
@@ -76,14 +73,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
       pageController.jumpToPage(index);
     }
-
   }
 
 
   @override
   Widget build(BuildContext context) {
-
-
     // her zamanki olaylar, burda sadece SafeArea body'si yok
     return Scaffold(
 
@@ -92,7 +86,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
         onPageChanged: (page) {
           setState(() {
-            _pageIndex=page;
+            _pageIndex = page;
           });
         },
 
@@ -102,7 +96,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
            burda da children olarak gerekli dart dosyaları aracılığıyla classları bağlıyoruz index sistemi
             de burda çalışıyor; bilgisayarlar saymaya sıfırdan başladığı için sıfır olunca GossipPage açılıyor, sırasıyla takip ediyor işte
            */
-
 
 
           GossipPage(),
@@ -122,11 +115,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
           // navigasyondaki routeları iconlara ve labellara bağlıyouruz, böylece kullanıcı gitmek istediği yeri seçebiliyor
 
-          BottomNavigationBarItem(icon: Icon(Icons.inbox_rounded), label: 'Gossip '),
-          BottomNavigationBarItem(icon: Icon(Icons.fastfood_rounded), label: 'Yemek'),
-          BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: 'Anasayfa'),
-          BottomNavigationBarItem(icon: Icon(Icons.work_rounded), label: 'Atölye'),
-          BottomNavigationBarItem(icon: Icon(Icons.markunread_rounded), label: 'Duyurular'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.inbox_rounded), label: 'Gossip '),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.fastfood_rounded), label: 'Yemek'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_rounded), label: 'Anasayfa'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.work_rounded), label: 'Atölye'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.markunread_rounded), label: 'Duyurular'),
 
         ],
         currentIndex: _pageIndex,
@@ -145,9 +143,35 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
 
       appBar: AppBar(
-        title: Row(children: [Image.asset("images/JARC-Logo.jpg", fit: BoxFit.contain, height: 32)]),
 
-      ),
+
+          title: Container(
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                children:
+                [Image.asset("images/JARC-Logo.jpg", fit: BoxFit.contain,
+                height: 32),
+            SizedBox(width: 35),
+            Text("Remixopolis'23 "),
+            SizedBox(width: 45),
+
+                  IconButton(
+
+                    icon: Icon(Icons.account_circle_rounded,
+                        size:36),
+                    onPressed: () {
+
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ProfilePage()));
+
+                    },
+
+                  ),
+          ]),
+    ),
+
+    ),
     );
   }
 }

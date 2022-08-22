@@ -20,13 +20,13 @@ class GossipPage extends StatefulWidget {
 
 class _GossipPageState extends State<GossipPage> {
 
-  final mytextFieldController = TextEditingController();
+  final mytextFieldController = TextEditingController(); //textField'a girdi yapıldığında değişkene atayabilmemize yarayan controller
 
   /* herhangi bir girdi olmadan ekranda çalıştığı anlaşılsın diye "null" diye bir değer atadım, istenilen başka bir şey ya da boşluk da olabilir fark etmez
    bu değer sonrasında textfield'dan gelen input sonrası güncellenecek ve anlık olarak ekrana yansıyacak
    */
 
-  String gossipMes = "null";
+  String gossipMes = "null"; // textField'dan gelen girdinin atandığı değişkenin başlangıç değeri
 
   @override
 
@@ -34,97 +34,101 @@ class _GossipPageState extends State<GossipPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Column(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Center(
+            child: Column(
 
-            // column içerisindeki widgetlar telefon dik dururken yere yatay olacak şekilde ortalanıyor
-              crossAxisAlignment: CrossAxisAlignment.center,
+              // column içerisindeki widgetlar telefon dik dururken yere yatay olacak şekilde ortalanıyor
+                crossAxisAlignment: CrossAxisAlignment.center,
 
-              children: <Widget>[
-                SizedBox(height: 50),
+                children: <Widget>[
+                  SizedBox(height: 50),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
 
-                  children: <Widget>[
+                    children: <Widget>[
 
-                    // başlık kısmı font büyüklüğü zart zurt ayarlıyoruz, sonrasında da küçük bir posta fotosu koydum boş durmasın o kadar
-                    // her seferine "Poppins" diye fontu ayarlamaya da gerek yok onu main dosyasına themeData içine koymuştum
+                      // başlık kısmı font büyüklüğü vb. ayarlıyoruz, sonrasında da küçük bir posta fotosu koydum boş durmasın o kadar
+                      // her seferine "Poppins" diye fontu ayarlamaya da gerek yok onu main dosyasına themeData içine koymuştum
 
-                    Text("Gossip Box ", style: TextStyle(fontSize: 30)),
-                    SizedBox(width: 20),
-                    Image.asset("images/white-envelope-with-blue-letter-inside.png", fit: BoxFit.contain, height: 70),
+                      Text("Gossip Box ", style: TextStyle(fontSize: 30)), // metin ve görsel aynı row içinde aralarında ufak bir boşluk olacak şekilde gösteriliyor
+                      SizedBox(width: 20),
+                      Image.asset("images/white-envelope-with-blue-letter-inside.png", fit: BoxFit.contain, height: 70),
 
-          ]
-                ),
+            ]
+                  ),
 
-                Column(
-                  children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      "Merak etme, kimin yazdığı bilinmeyecek!",
-                      style: TextStyle(
-                        fontSize: 17,
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 30,
                       ),
-                    ),
-
-
-
-                    SizedBox(
-                      height: 60,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(15.0),
-                      child: TextField(
-                          controller: mytextFieldController,
-                        decoration: InputDecoration(filled: true,
-                        fillColor: Colors.white12,
-                          border: OutlineInputBorder(),
+                      Text(
+                        "Merak etme, kimin yazdığı bilinmeyecek!",
+                        style: TextStyle(
+                          fontSize: 17,
                         ),
-
-                        // yazı yazılırken yana kaymaması, direkt olarak tüm yazı gözükecek şekilde yeni satıra geçmesi için minLines değeri ekledim
-                        minLines: 4,
-                        maxLines:10
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-
-                ElevatedButton(
-                    onPressed: () {
-
-                      // anlık olarak aşağıdaki text değişiyor
-
-                      setState(() {
-                        gossipMes = mytextFieldController.text;
-                      });
-
-                    },
-                    child: Text('Gönder')),
-
-                Row(
-
-                  /*
-                   row kullandığımız için ekran dikken aşağıya paralel olacak şekilde ortalamak yerine column'da kullanığımız
-                   cross yerine main kullanıyoruz
-                   */
-
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Mesajınız: "),
-                    Text(gossipMes),
-                  ]
-                ),
 
 
+                      SizedBox(
+                        height: 60,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(15.0),
+                        child: TextField(
+                            controller: mytextFieldController, // oluşturduğumuz controller'ı bu textField ile ilişkilendiriyoruz
+                          decoration: InputDecoration(filled: true,
+                          fillColor: Colors.white12,
+                            border: OutlineInputBorder(), // hoş gözükmesi için etrafına ufak bir çizgi koydum
+                          ),
 
-              ]),
+                          // yazı yazılırken yana kaymaması, direkt olarak tüm yazı gözükecek şekilde
+                            // yeni satıra geçmesi için minLines değeri ekledim
+                          minLines: 4,
+                          maxLines:10
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+
+                  ElevatedButton(
+                      onPressed: () {
+
+                        // anlık olarak aşağıdaki text değişiyor
+
+                        setState(() {
+                          gossipMes = mytextFieldController.text; // butona basıldığında controller ile ilişkilendirilmiş olan textField'daki
+                          // yazıyı alarak değişkene atıyor
+                        });
+
+                      },
+                      // buton için olan yazı
+                      child: Text('Gönder')),
+                  Row(
+
+                    /*
+                     row kullandığımız için ekran dikken aşağıya paralel olacak şekilde ortalamak yerine column'da kullanığımız
+                     cross yerine main kullanıyoruz
+                     */
+
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Mesajınız: "),
+                      // ekranda değişkeni gösteriyoruz
+                      Text(gossipMes),
+                    ]
+                  ),
+
+
+
+                ]),
+          ),
         ),
       ),
     );

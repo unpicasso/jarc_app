@@ -10,6 +10,8 @@ class AnnouncementsPage extends StatefulWidget {
   @override
   State<AnnouncementsPage> createState() => _AnnouncementsPageState();
 }
+// bu sayfada eğer mevcutsa duyuruların gösterilebileceği bir alan ayarladım
+// şu anlık yalnızca bir asset bir de text'ten ibaret, o sebeple burada anlatılabilecek bir şey yok her zamanki olaylar
 
 class _AnnouncementsPageState extends State<AnnouncementsPage> {
   @override

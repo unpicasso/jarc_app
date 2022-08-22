@@ -5,7 +5,7 @@ import 'LoginPage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-
+// kodun başlangıç yeri burası, uygulamanın "loginPage"den başlayacağı ve themeData dışında başka bir şey yer almıyor
 
 void main() {
   runApp(ProviderScope(
