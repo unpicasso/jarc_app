@@ -71,11 +71,11 @@ class _HomePageState extends ConsumerState<HomePage> {
                     children: [
                       Text(
                         "Gün:  ",
-                        style: TextStyle(fontSize: 30),
+                        style: TextStyle(fontSize: 24),
                       ),
                       Text(
                         dayCount.toString(), // int olduğundan text içine koymak için .toString() kullanmak gerekiyor
-                        style: TextStyle(fontSize: 30),
+                        style: TextStyle(fontSize: 24),
                       ),
                     ],
                   ),
@@ -89,16 +89,19 @@ class _HomePageState extends ConsumerState<HomePage> {
                       child: Text(
                         "Atölye: ",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 17,
                         ),
                       ),
                     ),
 
-                    Text(workshopString,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: workshopColorWarn,
-                    ),),
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(workshopString,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: workshopColorWarn,
+                      ),),
+                    ),
 
 
 
@@ -125,10 +128,13 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 width: 5
                               ),
 
+                              /*
                               Image.asset(
                                   "images/3d-fluency-clock.png",
                                   fit: BoxFit.contain,
                                   height: 25),
+
+                               */
                             ]
                           ),
 
@@ -138,7 +144,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "08.00-09.30",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -147,7 +153,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "09.30-10.00",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -156,7 +162,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "10.00-11.00",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -165,7 +171,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "11.00-12.00",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -174,7 +180,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "12.00-13.00",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -183,7 +189,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "13.00-14.30",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -192,25 +198,25 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "14.30-15.00",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "15.00-16.00",
+                              "15.00-14.00",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "16.00-17.00",
+                              "14.00-17.00",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -219,7 +225,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "17.00-18.00",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -228,7 +234,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "18.00-21.00",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -243,6 +249,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   ),
                                 ),
 
+                                /*
                                 SizedBox(
                                     width: 5
                                 ),
@@ -251,6 +258,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                                     "images/3d-fluency-two-tickets.png",
                                     fit: BoxFit.contain,
                                     height: 24),
+
+                                 */
                               ]
                           ),
                           SizedBox(height: 10),
@@ -259,16 +268,16 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Kayıt",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Açılış Konuşması ",
+                              "Açılış",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -277,7 +286,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Elevator Pitch",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -286,7 +295,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               caseSunumString,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: workshopColorSimple,
                               ),
                             ),
@@ -296,7 +305,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Öğle Yemeği",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -305,7 +314,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Ice Breaking",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -314,7 +323,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Konuşma",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -325,7 +334,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               child: Text(
                                 "Atölye",
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   color: workshopColorSimple,
                                 ),
                               ),
@@ -337,7 +346,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               caseStudyString,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: workshopColorSimple,
                               ),
                             ),
@@ -347,7 +356,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Konuşma",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -356,7 +365,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Kapanış Yemeği",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -375,10 +384,13 @@ class _HomePageState extends ConsumerState<HomePage> {
                                     width: 5
                                 ),
 
+                                /*
                                 Image.asset(
                                     "images/casual-life-3d-close-up-of-pink-location-marker.png",
                                     fit: BoxFit.contain,
                                     height: 24),
+
+                                 */
                               ]
                           ),
                           SizedBox(height: 10),
@@ -387,7 +399,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Forum",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -397,7 +409,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Tiyatro",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -407,7 +419,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Tiyatro",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -417,7 +429,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                              caseSunumLocation,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: workshopColorWarn,
                               ),
                             ),
@@ -428,7 +440,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Maze ",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -439,7 +451,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Plato",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -449,7 +461,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Tiyatro",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -459,7 +471,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               workshopLocation,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: workshopColorWarn,
                               ),
                             ),
@@ -470,7 +482,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               caseStudyLocation,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: workshopColorWarn,
                               ),
                             ),
@@ -481,7 +493,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Tiyatro ",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -491,7 +503,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: Text(
                               "Maze ",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),
